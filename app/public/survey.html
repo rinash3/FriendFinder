@@ -153,7 +153,7 @@
 
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
-     Submit</button>
+      Submit</button>
 
     <hr>
     <footer class="footer">
@@ -161,9 +161,59 @@
         <p><a href="/api/friends">Friends List</a></p>
       </div>
     </footer>
-
   </div>
-
 </body>
-
 </html>
+<script type="text/javascript">
+  // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
+  // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
+  // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
+  // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+
+  $("#submit").on("click", function(event) {
+    event.preventDefault();
+
+    // Here we grab the form elements
+    var newFriend = {
+      name: $('#name').val().trim(),
+                profilePic: $('#photo').val().trim(),
+                scores: [
+                    $('#q1').val(),
+                    $('#q2').val(),
+                    $('#q3').val(),
+                    $('#q4').val(),
+                    $('#q5').val(),
+                    $('#q6').val(),
+                    $('#q7').val(),
+                    $('#q8').val(),
+                    $('#q9').val(),
+                    $('#q10').val(),
+                ]
+    };
+
+    console.log(newFriend);
+
+
+    $.post("/api/friends", newFriend,function(data) {
+
+        
+        console.log("new friend");
+        
+ //clear form after submission
+            $('#name').val("");
+            $('#photo').val("");
+            $('#q1').val("");
+            $('#q2').val("");
+            $('#q3').val("");
+            $('#q4').val("");
+            $('#q5').val("");
+            $('#q6').val("");
+            $('#q7').val("");
+            $('#q8').val("");
+            $('#q9').val("");
+            $('#q10').val("");
+      });
+
+  });
+
+</script>
