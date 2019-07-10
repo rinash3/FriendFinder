@@ -1,4 +1,3 @@
-
 var path = require('path');
 
 // Import the list of friend entries
